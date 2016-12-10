@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <style>
+		    .font
+			{
+			    font-family:sanserif;
+                font-size:20;				
+				color:black;
+			}
+			#stop
+			{
+			    width:50px;
+                height:50px;
+                align:right;  				
+				
+			}
+			#level
+			{
+			    max-width:60%;
+                float:left;				
+			}
+		    #stopspan
+            {
+			    max-width:30%;			
+            }   
+           #canimg
+           {
+                width: 750px;
+                height: 500px;
+                background-image:url(resources/images/gam.png);
+                background-size:100% 100%;
+                transform: translate(311px,100px);
+                margin: auto;
+                border:0px;
+        
+            }
+            #balls
+            {
+			    transform: translate(-440px,100px);
+   
+            }   			
+			
+		</style>
+    </head>
+    <body style="background-color: #2a2a2a;
+            color:#cccccc;
+              margin: 0px;
+              padding: 0px;
+              border: 0px;" onload="dropBalls()" onkeypress="move(event)">
+	     
+		<canvas id="canimg">
+                <p>Your browser doesn't support HTML5 canvas.</p>
+        </canvas>
+		<canvas id="balls" style="position:absolute" width="750px" height="400px" ></canvas>
+			<!--======================!-->
+	         <div style="position:absolute;left:311px;top:100px;"class="font">
+		        <span id="level">   
+		            <div><span id="livLabel">Lives</span><span id="liveSpan"> 3</span></div>
+			        <div><span id="scorLabel">Score</span><span id="scoreSpan">0</span></div>
+			    </span>
+                <span id="stopspan">
+			        <input type="image" src="Resources/images/stop.png" alt="not found" id="stop"/>
+                </span> 			
+		    </div>  
+	 	   
+		    
+	 	        <canvas id="kogyCanvas" width="150px" height="150px" style="position:absolute;left:611px;top:450px"></canvas>
+		    
+	<!--	</div>!-->
+        <script>
+		  var colors=["red","blue","green","yellow","pink","aqua","coral","DarkCyan","DarkRed","HotPink"];
+			var radiusball=[2,2.5,3,3.5,4,4.5,5,5.5,6,6.5];
+			var xball=[100,450,200,300,350,400,250,500,600,700];
+			var score=document.getElementById("scoreSpan").innerHTML;
+			var ballCanvas;
+			var ballContext;
+			var timer;
+			var x=0;
+			var y=0;
+			var i;
+			var j;
+			var radiRandom;
+			var colorRandom;
+			var repeatTimer;
+			var plus; 			
+			function createBalls(i)
+			{
+		        ballCanvas=document.getElementById("balls");
+                ballContext=ballCanvas.getContext("2d");
+				if(y<50)
+				{
+				    ballContext.clearRect(0,0, ballCanvas.width, ballCanvas.height);
+	     		    ballContext.beginPath();
+					x=xball[i];
+		     	    ballContext.arc(x,(y++)*10,10*radiusball[i],0,2*Math.PI);	
+	                ballContext.fillStyle=colors[i];
+	                ballContext.fill();
+	                ballContext.closePath();
+					switch(radiusball[i])
+					{
+					    case 6.5:
+                            plus=65;
+					        break;      		
+                        case 6:
+                            plus=60;
+							break;
+                        case 5.5:
+                            plus=55;
+							break;
+                        case 5:
+                            plus=50;
+							break;
+                        case 4.5:
+                            plus=25;
+							break;
+                        case 4:
+						    plus=20;
+							break;
+						case 3.5:
+                            plus=15;
+							break;
+                        case 3:
+                            plus=10;
+							break;
+                        case 2.5:
+                            plus=5;
+							break;
+                        default:
+                            plus=1;						
+							break;
+                        							
+					} 
+					
+					if(y==36)
+					{
+					    if(((x+236)>=(parseInt(kogyCanvas.style.left)-20))&&((x+236)<=(parseInt(kogyCanvas.style.left)+20)))  
+						{
+						    document.getElementById("scoreSpan").innerHTML=parseInt(document.getElementById("scoreSpan").innerHTML)+plus;    
+							if(parseInt(document.getElementById("scoreSpan").innerHTML)==300;
+							{
+							    document.getElementById("liveSpan").innerHTML=parseInt(document.getElementById("liveSpan").innerHTML)+1;   
+							}
+						}
+						else
+				        {
+  						    document.getElementById("liveSpan").innerHTML=parseInt(document.getElementById("liveSpan").innerHTML)-1;    
+							if(document.getElementById("liveSpan").innerHTML==0)
+							{
+							    window.location.href = "gameover.html";  
+							}
+						}
+					}
+				}
+				else
+				{
+				    clearInterval(timer) ;
+				}
+			}
+            
+			function dropBalls()
+			{
+			    radiRandom=Math.floor((Math.random()*10)+1);
+				colorRandom=Math.floor((Math.random()*10)+1);
+				//alert("ball"+xball[radiRandom-1]);	
+				timer=setInterval("createBalls(radiRandom-1)",200);	
+			}
+            function moreballs()
+            {
+			    y=0;
+				dropBalls();
+            }  			
+			repeatTimer=setInterval("moreballs()",4000);
+			var kogyCanvas=document.getElementById("kogyCanvas");
+			var kogyContext=kogyCanvas.getContext("2d");
+			var img=new Image();
+			img.src="Resources/images/Myball.png";
+			img.onload=function()
+			{
+			    kogyContext.drawImage(img,0,0,150,150);
+			}
+			
+			//kogyCanvas.onkeypress= move(this);
+			function move(event)
+			{
+			    if(event.keyCode==37)    
+				{
+				    if(parseInt(kogyCanvas.style.left)>310)
+				        kogyCanvas.style.left=parseInt(kogyCanvas.style.left)-5+'px'; 
+						
+				}
+				if(event.keyCode==39)    
+				{
+			        //alert("right");	
+					if(parseInt(kogyCanvas.style.left)<920)
+					    kogyCanvas.style.left=parseInt(kogyCanvas.style.left)+5+'px';
+						
+				}			
+			 //   var charc=getChar(e);
+		
+				//x();
+		
+			}
+			
+			
+        </script>  		
+    </body>
+</html>
