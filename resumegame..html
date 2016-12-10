@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <style>
+            #rectangle{
+                background-image: url(../Resources/Images/pattern.png);
+                background-size: 100% 100%;
+                transform: translate(300px,80px);
+            }
+            body{
+                background-color: #000;
+            }
+            #logo{
+                transform: translate(-330px,-260px);
+
+            }
+        </style>
+    </head>
+    
+    <body>
+        <canvas id="rectangle" width="750px" height="500px">
+            <script>
+                var rect=document.getElementById("rectangle");
+                var c=rect.getContext("2d");
+                c.strokeRect(0,420,870,50);
+                c.beginPath();
+                c.rect(0,420,870,50);
+                c.fillStyle="#ff3249";
+                c.fill(); 
+                
+                c.font="bold 45px Curlz MT";
+                c.fillStyle = "#fff";
+                c.fillText("Resume Game",255,456);
+                
+                c.font="bold 45px Curlz MT";
+                c.fillStyle = "#fff";
+                c.fillText("Game Paused!",245,220);
+            </script>
+        </canvas>
+        <img id="logo" src="../Resources/Images/logo.png">
+    </body>
+</html>
