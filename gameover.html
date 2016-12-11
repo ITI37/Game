@@ -59,7 +59,7 @@
     </style>
     
     <html>
-        <body id="game" onload="getscore();">
+        <body id="game">
             <canvas id="canvasimg" class="canimage">
                 <p>Your browser doesn't support HTML5 canvas.</p>
             </canvas>
@@ -71,14 +71,10 @@
            
             
           <script>
-              function getscore()
-              {
-                  document.getElementById("realscore").innerHTM=localStorage.getItem("score");
-                  
-              }
               
            var rectplaygame=document.getElementById("playgame");
            var rectpgame=rectplaygame.getContext("2d");
+		   document.getElementById("realscore").innerHTML=localStorage.getItem("score");
            rectpgame.font="40px bold Curlz MT";  
            rectpgame.fillStyle ="#e9263e";      
            rectpgame.fillText("Main Menu",50,rectplaygame.height/2);
