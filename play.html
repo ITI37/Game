@@ -1,0 +1,83 @@
+<doctype html>
+    <style>
+        #game
+        {
+            background-color: #2a2a2a;
+            color:#cccccc;
+              margin: 0px;
+              padding: 0px;
+              border: 0px;
+             
+        }
+        #canvasimg
+        {
+            position: absolute;
+            width: 750;
+            height: 500;
+            background-image:url(resources/images/gam.png);
+            background-size:100% 100%;
+            transform: translate(321px,100px);
+            margin: auto;
+            border:0px;  
+        }
+        #playgame
+        {
+           width: 747;
+           height:70px; 
+           transform: translate(321px,290px);
+           border:2px solid rgba(255,255,255,0.5); 
+           background-color:rgba(187,224,253,0.5);
+        }
+        #highscorecanvas
+        {
+            width: 747;
+            height:70px; 
+            transform: translate(321px,300px);
+            border:2px solid rgba(255,255,255,0.5);
+            background-color:rgba(187,224,253,0.5); 
+        }
+    </style>
+    
+    <html>
+        <body id="game">
+            <canvas id="canvasimg" class="canimage">
+                <p>Your browser doesn't support HTML5 canvas.</p>
+            </canvas>
+            <canvas id="playgame" class="canplay" onclick="gotogame();" onmouseover="changecolor1();"></canvas>
+            <canvas id="highscorecanvas" class="canscore" onclick="gotohighscorepage();"   onmouseover="changecolor2();"></canvas>
+            
+          <script>
+           var rectplaygame=document.getElementById("playgame");
+           var rectpgame=rectplaygame.getContext("2d");
+           rectpgame.font="50px bold Curlz MT";  
+           rectpgame.fillStyle ="#e9263e";      
+           rectpgame.fillText("Play Game",50,rectplaygame.height/2);
+              function gotogame()
+              {
+                  location.href = "game.html";
+              }
+              function changecolor1()
+              {
+                  document.getElementById("playgame").style.backgroundColor='#fbf8c8';
+              }
+            
+             
+            
+          var recthighscore=document.getElementById("highscorecanvas");
+          var rectscore=recthighscore.getContext("2d");
+          rectscore.font="50px bold Curlz MT";
+          rectscore.fillStyle ="#e9263e"; 
+          rectscore.fillText("Highscore",50,recthighscore.height/2);
+               function gotohighscorepage()
+              {
+                  location.href = "highscore.html"; 
+              }
+               
+              function changecolor2()
+              {
+                  document.getElementById("highscorecanvas").style.backgroundColor='#fbf8c8';
+              }
+            </script>
+        </body>
+    
+    </html>
