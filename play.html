@@ -55,14 +55,12 @@
               function gotogame()
               {
                   location.href = "game.html";
+				  localStorage.setItem("flag", 0);
               }
               function changecolor1()
               {
-                  document.getElementById("playgame").style.backgroundColor='#eaf5c8';
+                  document.getElementById("playgame").style.backgroundColor='#fbf8c8';
               }
-            
-             
-            
           var recthighscore=document.getElementById("highscorecanvas");
           var rectscore=recthighscore.getContext("2d");
           rectscore.font="50px bold Curlz MT";
@@ -75,7 +73,7 @@
                
               function changecolor2()
               {
-                  document.getElementById("highscorecanvas").style.backgroundColor='#eaf5c8';
+                  document.getElementById("highscorecanvas").style.backgroundColor='#fbf8c8';
               }
             </script>
         </body>
