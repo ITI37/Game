@@ -84,7 +84,7 @@
 			var colorRandom;
 			var repeatTimer;
 			var plus; 			
-			function createBalls(i)
+			function createBalls(i,j)
 			{
 		        ballCanvas=document.getElementById("balls");
                 ballContext=ballCanvas.getContext("2d");
@@ -94,7 +94,7 @@
 	     		    ballContext.beginPath();
 					x=xball[i];
 		     	    ballContext.arc(x,(y++)*10,10*radiusball[i],0,2*Math.PI);	
-	                ballContext.fillStyle=colors[i];
+	                ballContext.fillStyle=colors[j];
 	                ballContext.fill();
 	                ballContext.closePath();
 					switch(radiusball[i])
@@ -130,23 +130,25 @@
                             plus=1;						
 							break;
                         							
-					} 
+					}					
 					
 					if(y==36)
 					{
 					    if(((x+236)>=(parseInt(kogyCanvas.style.left)-20))&&((x+236)<=(parseInt(kogyCanvas.style.left)+20)))  
 						{
 						    document.getElementById("scoreSpan").innerHTML=parseInt(document.getElementById("scoreSpan").innerHTML)+plus;    
-							if(parseInt(document.getElementById("scoreSpan").innerHTML)==300;
-							{
-							    document.getElementById("liveSpan").innerHTML=parseInt(document.getElementById("liveSpan").innerHTML)+1;   
-							}
+							if(colors[j]=="yellow")
+					        {
+					            document.getElementById("liveSpan").innerHTML=parseInt(document.getElementById("liveSpan").innerHTML)+1;   
+					        }
 						}
 						else
 				        {
   						    document.getElementById("liveSpan").innerHTML=parseInt(document.getElementById("liveSpan").innerHTML)-1;    
 							if(document.getElementById("liveSpan").innerHTML==0)
 							{
+							    localStorage.setItem("score", document.getElementById("scoreSpan").innerHTML);   
+								//alert(localStorage.getItem("score"));
 							    window.location.href = "gameover.html";  
 							}
 						}
@@ -157,13 +159,12 @@
 				    clearInterval(timer) ;
 				}
 			}
-            
 			function dropBalls()
 			{
 			    radiRandom=Math.floor((Math.random()*10)+1);
 				colorRandom=Math.floor((Math.random()*10)+1);
 				//alert("ball"+xball[radiRandom-1]);	
-				timer=setInterval("createBalls(radiRandom-1)",200);	
+				timer=setInterval("createBalls(radiRandom-1,colorRandom-1)",200);	
 			}
             function moreballs()
             {
